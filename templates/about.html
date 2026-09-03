@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Hakkımızda - Sporcu Hayat{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 40%, #780000 100%);
+        color: #ffffff;
+    }
+
+    .about-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 40px 30px;
+        background: rgba(15, 23, 42, 0.85);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .about-title {
+        color: #38bdf8;
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .about-text {
+        color: #e2e8f0;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .highlight {
+        color: #ef4444;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <h1 class="about-title">🥊 Hakkımızda: Hayat Sporla Güzel</h1>
+    
+    <p class="about-text">
+        <span class="highlight">Sporcu Hayat</span>, sporun ve sağlıklı yaşamın hiçbir kalıba, mekana veya kıyafete sığdırılamayacağı inancıyla kuruldu.
+    </p>
+
+    <p class="about-text">
+        Amacımız;Her yaş grubundan insanın kendine göre spora tutunması gerektiğini ve sağlıklı yaşama özen göstermesini desteklemektir.Ayrıca tesettürü ya da günlük kıyafetleriyle spor yapamayacağını düşünen veya nereden başlayacağını bilemeyen herkese cesaret vermektir. İster evinde matın üzerinde, ister dışarıda bir parkta, ister en rahat hissettiğin elbisenle... Yeter ki adım at, yeter ki hareket et!
+    </p>
+
+    <p class="about-text">
+        Platformumuz üzerinden günlük motivasyon görevleri alabilir, hareket alışkanlığı kazanabilir ve spor yolculuğunda yalnız olmadığını hissedebilirsin.
+    </p>
+</div>
+{% endblock %}

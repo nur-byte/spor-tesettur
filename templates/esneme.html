@@ -1,0 +1,477 @@
+{% extends "base.html" %}
+
+{% block title %}Kapsamlı Egzersiz & Esnetme Rehberi - Sporcu Hayat{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #155e75 100%);
+        color: #ffffff;
+    }
+
+    .page-container {
+        max-width: 850px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .header-card {
+        background: rgba(15, 23, 42, 0.85);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        backdrop-filter: blur(10px);
+        border-radius: 24px;
+        padding: 35px 25px;
+        text-align: center;
+        margin-bottom: 25px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-card h1 {
+        background: linear-gradient(90deg, #38bdf8, #34d399);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.1rem;
+        margin-bottom: 10px;
+        font-weight: 800;
+    }
+
+    .header-card p {
+        color: #e2e8f0;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+
+    /* Hızlı Erişim Kısayolları */
+    .quick-nav {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        border-radius: 16px;
+        padding: 15px 20px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .nav-chip {
+        background: rgba(56, 189, 248, 0.12);
+        color: #38bdf8;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        padding: 8px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.25s ease;
+    }
+
+    .nav-chip:hover {
+        background: #38bdf8;
+        color: #0f172a;
+    }
+
+    /* Kategori Bölüm Başlıkları */
+    .section-title {
+        color: #34d399;
+        font-size: 1.5rem;
+        margin: 40px 0 20px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid rgba(52, 211, 153, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* KART VE GÖRSEL DÜZENLEMELERİ */
+    .exercise-card {
+        background: rgba(30, 41, 59, 0.85);
+        border-left: 5px solid #38bdf8;
+        border-radius: 18px;
+        padding: 25px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .exercise-content {
+        flex: 1;
+    }
+
+    .exercise-img-box {
+        width: 100px;
+        height: 100px;
+        min-width: 100px;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    .exercise-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .exercise-content h4 {
+        color: #38bdf8;
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+
+    .badge-container {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+    }
+
+    .exercise-badge {
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
+        border: 1px solid #10b981;
+        border-radius: 12px;
+        padding: 2px 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .exercise-content p {
+        color: #cbd5e1;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .steps-list {
+        padding-left: 20px;
+        color: #94a3b8;
+        font-size: 0.92rem;
+    }
+
+    .steps-list li {
+        margin-bottom: 6px;
+    }
+
+    .tip-box {
+        background: rgba(56, 189, 248, 0.1);
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        border-radius: 18px;
+        padding: 20px;
+        margin-top: 40px;
+        text-align: center;
+        color: #e2e8f0;
+    }
+
+    /* Mobil Uyumlu Ekran */
+    @media (max-width: 600px) {
+        .exercise-card {
+            flex-direction: column-reverse;
+            align-items: center;
+            text-align: left;
+        }
+
+        .exercise-img-box {
+            width: 90px;
+            height: 90px;
+            min-width: 90px;
+            margin-bottom: 10px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+
+    <div class="header-card">
+        <h1>🧘‍♀️ Kapsamlı Tüm Vücut Esnetme & Spor Rehberi</h1>
+        <p>Boyundan ayak bileklerine kadar tüm kas gruplarını gevşeten esnemeler ve rahatça yapabileceğin pratik egzersiz adımları.</p>
+    </div>
+
+    <!-- Hızlı Erişim Kısayolları -->
+    <div class="quick-nav">        
+        <a href="#kardiyo-isınma" class="nav-chip">🚶‍♀️ Kardiyo & Isınma</a>
+        <a href="#omuz-boyun" class="nav-chip">🧘‍♂️ Omuz & Boyun</a>
+        <a href="#kol-gogus" class="nav-chip">💪 Kol & Göğüs</a>
+        <a href="#karin-core" class="nav-chip">🔥 Karın & Merkez</a>
+        <a href="#sirt-omurga" class="nav-chip">🌸 Sırt & Omurga</a>
+        <a href="#bacak-kalca" class="nav-chip">🦵 Bacak & Kalça</a>
+    </div>
+
+    <!-- 1. KARDİYO VE İSINMA -->
+    <h2 id="kardiyo-isınma" class="section-title">🚶‍♀️ Kardiyo & Hafif Isınmalar</h2>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>1. Jumping Jacks (Zıplayarak Kol & Bacak Aç-Kapa)</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Tüm Vücut Kardiyo</span>
+                <span class="exercise-badge">Set: 3 x 30 Saniye</span>
+            </div>
+            <p>Kalp ritmini hızlandıran, vücudu baştan aşağı ısıtan harika bir ısınma hareketi.</p>
+            <ol class="steps-list">
+                <li>Ayakta dik durun. Zıplayarak bacaklarınızı iki yana açarken kollarınızı da başınızın üzerinde birleştirin.</li>
+                <li>Tekrar zıplayarak başlangıç pozisyonuna dönün ve ritmik olarak devam edin.</li>
+            </ol>
+        </div>
+        <!-- PNG Görsel Alanı -->
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='jumping-jack.png') }}" alt="Jumping Jack">
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>2. Tempolu Park & Ev İçi Yürüyüş</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Tüm Seviyeler</span>
+                <span class="exercise-badge">Süre: 20-30 Dakika</span>
+            </div>
+            <p>Açık havada veya ev içinde rahatlıkla yapabileceğin kalori yaktırıcı tempo çalışması.</p>
+            <ol class="steps-list">
+                <li><strong>Isınma:</strong> İlk 3 dakika yavaş tempoda adımlayın.</li>
+                <li><strong>Tempo:</strong> 2 dakika tempolu hızlı adımlar, 1 dakika normal adımlar şeklinde döngüyü sürdürün.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='exercise.png') }}" alt="Tempolu Park & Ev İçi Yürüyüş">
+        </div>
+    </div>
+
+    <!-- 2. OMUZ VE BOYUN -->
+    <h2 id="omuz-boyun" class="section-title">🧘‍♂️ Omuz & Boyun Rahatlatma</h2>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>1. Baş ve Boyun Esnetme</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Üst Beden</span>
+                <span class="exercise-badge">Süre: Her Yön 20 Sn</span>
+            </div>
+            <p>Günlük gerginliği ve duruş bozukluklarına bağlı boyun ağrılarını hafifletir.</p>
+            <ol class="steps-list">
+                <li>Dik oturun veya ayakta durun. Başınızı yavaşça sağ omzunuza doğru eğin.</li>
+                <li>Sağ elinizle başınızın üstünden hafifçe destek vererek 20 saniye bekleyin.</li>
+                <li>Aynı adımı sol taraf için ve başı öne eğerek tekrarlayın.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='side.png') }}" alt="Baş ve Boyun Esnetme">
+    </div>
+</div>
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>2. Omuz Çapraz Çekişi (Cross-Body Shoulder Stretch)</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Omuz & Arka Kol</span>
+                <span class="exercise-badge">Süre: Her Kol 30 Sn</span>
+            </div>
+            <p>Omuz eklemlerini rahatlatır ve kas gerginliğini giderir.</p>
+            <ol class="steps-list">
+                <li>Sağ kolunuzu göğsünüzün önünden sola doğru uzatın.</li>
+                <li>Sol eliniz veya ön kolunuzla sağ kolunuzu dirseğin hemen üstünden göğsünüze doğru çekin.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='hand.png') }}" alt="Omuz Çapraz Çekişi">
+        </div>
+    </div>
+
+    <!-- 3. KOL VE GÖĞÜS -->
+    <h2 id="kol-gogus" class="section-title">💪 Kol & Göğüs Egzersizleri</h2>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>1. Triceps (Arka Kol) Esnetme</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Arka Kol</span>
+                <span class="exercise-badge">Süre: 30 Saniye</span>
+            </div>
+            <p>Kolların esnekliğini artırır ve sırt üst bölgesini açar.</p>
+            <ol class="steps-list">
+                <li>Bir kolunuzu yukarı kaldırıp dirsekten bükerek elinizi kürek kemiklerinize doğru indirin.</li>
+                <li>Diğer elinizle dirseğinizden tutarak geriye doğru hafifçe bastırın.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>2. Duvar Veya Sandalye Şınavı</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Göğüs & Kol Güçlenme</span>
+                <span class="exercise-badge">Set: 3 x 10 Tekrar</span>
+            </div>
+            <p>Zorlanmadan, dışarıda park bankında veya evde duvara karşı rahatça yapılabilir.</p>
+            <ol class="steps-list">
+                <li>Duvara bir kol mesafesi uzaklıkta durun, avuç içlerinizi omuz hizasında duvara dayayın.</li>
+                <li>Vücudunuzu bozmadan dirsekleri bükerek duvara yaklaşın ve kendinizi geri itin.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='push-up.png') }}" alt="Duvar Veya Sandalye Şınavı">
+        </div>
+    </div>
+
+    <!-- 4. KARIN VE MERKEZ BÖLGE -->
+    <h2 id="karin-core" class="section-title">🔥 Karın & Merkez Bölge (Core)</h2>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>1. Ayakta Çapraz Diz-Dirsek (Standing Crunch)</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Karın & Yan Kaslar</span>
+                <span class="exercise-badge">Set: 3 x 15 Tekrar</span>
+            </div>
+            <p>Yere yatmadan ayakta kolayca yapılabilen etkili karın egzersizidir.</p>
+            <ol class="steps-list">
+                <li>Ellerinizi başınızın arkasına koyun.</li>
+                <li>Sağ dizinizi yukarı kaldırırken sol dirseğinizi sağ dizinize doğru çapraz şekilde yaklaştırın.</li>
+                <li>Taraf değiştirerek ritmik şekilde devam edin.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='sit-up.png') }}" alt="Baş ve Boyun Esnetme">
+    </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>2. Kobra (Cobra) Karın Esnetme</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Karın & Bel Esnetme</span>
+                <span class="exercise-badge">Süre: 30 Saniye</span>
+            </div>
+            <p>Karın kaslarını uzatır ve gün boyu biriken bel gerginliğini alır.</p>
+            <ol class="steps-list">
+                <li>Yüzüstü mat üzerine yatın, ellerinizi göğüs yanlarına koyun.</li>
+                <li>Nefes alırken kollarınızla kendinizi yukarı itin, göğsünüzü açıp yukarı bakın.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='cobra.png') }}" alt="Baş ve Boyun Esnetme">
+    </div>
+    </div>
+
+    <!-- 5. SIRT VE OMURGA -->
+    <h2 id="sirt-omurga" class="section-title">🌸 Sırt & Omurga Mobilitesi</h2>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>1. Kedi-Deve Pozisyonu</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Omurga Sağlığı</span>
+                <span class="exercise-badge">Tekrar: 10-12 Ritim</span>
+            </div>
+            <p>Tüm omurgayı esnetir, bel ve sırt kaslarını çalıştırır.</p>
+            <ol class="steps-list">
+                <li>Emekleme pozisyonuna geçin (eller omuz, dizler kalça altında).</li>
+                <li>Nefes verirken sırtınızı yukarı yuvarlayıp çenenizi göğse yaklaştırın (Kedi).</li>
+                <li>Nefes alırken belinizi çukurlaştırıp göğsünüzü karşıya açın (Deve).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>2. Çocuk Pozu (Child's Pose)</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Tüm Sırt Rahatlama</span>
+                <span class="exercise-badge">Süre: 45-60 Saniye</span>
+            </div>
+            <p>Antrenman sonlarında sırtı, omuzları ve kalçayı aynı anda dinlendiren temel esnemedir.</p>
+            <ol class="steps-list">
+                <li>Topuklarınızın üzerine oturun, dizlerinizi hafifçe iki yana açın.</li>
+                <li>Kollarınızı öne doğru uzatarak gövdenizi yere indirin ve alnınızı mata koyun.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- 6. BACAK VE KALÇA -->
+    <h2 id="bacak-kalca" class="section-title">🦵 Bacak & Kalça Esnetme</h2>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>1. Oturarak Öne Uzanma (Seated Forward Bend)</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Arka Bacak & Bel</span>
+                <span class="exercise-badge">Süre: 30-45 Saniye</span>
+            </div>
+            <p>Bacaklar önde gergin düz uzatılmışken ayak parmak uçlarına uzanılarak yapılan derin hamstring esnetmesidir.</p>
+            <ol class="steps-list">
+                <li>Yere oturup iki bacağınızı da öne doğru dümdüz uzatın ve birleştirin.</li>
+                <li>Nefes verirken belinizi bükmeden, göğsünüzden öne doğru katlanarak ellerinizle parmak uçlarınıza veya kaval kemiklerinize uzanın.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='stretching.png') }}" alt="Baş ve Boyun Esnetme">
+    </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>2. Ayakta Ön Bacak (Quadriceps) Esnetme</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Ön Bacak & Denge</span>
+                <span class="exercise-badge">Süre: Her Bacak 30 Sn</span>
+            </div>
+            <p>Dizi arkaya büküp elle bilekten tutarak üst bacak kasını uzatan pratik hareket.</p>
+            <ol class="steps-list">
+                <li>Tek ayak üzerinde durun (gerekirse duvardan destek alın).</li>
+                <li>Diğer bacağınızı arkadan büküp bileğinizi elinizle tutarak topuğunuzu kalçanıza doğru yavaşça çekin.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>3. Kelebek (Butterfly) İç Bacak Esnetmesi</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">İç Bacak & Kasık</span>
+                <span class="exercise-badge">Süre: 45 Saniye</span>
+            </div>
+            <p>Kasık mobilitesini artırır ve bacak elastikiyetini destekler.</p>
+            <ol class="steps-list">
+                <li>Yere oturup ayak tabanlarınızı birleştirin.</li>
+                <li>Sırtınızı dik tutarak dizlerinizi yavaşça aşağı ve yukarı ritmik şekilde hareket ettirin.</li>
+            </ol>
+        </div>
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='meditation.png') }}" alt="Baş ve Boyun Esnetme">
+    </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="exercise-content">
+            <h4>4. Sandalye Destekli Squat (Alt Beden Güçlenme)</h4>
+            <div class="badge-container">
+                <span class="exercise-badge">Bacak & Kalça</span>
+                <span class="exercise-badge">Set: 3 x 12-15 Tekrar</span>
+            </div>
+            <p>Güvenli ve kontrollü bir şekilde yapılabilen squat varyasyonudur.</p>
+            <ol class="steps-list">
+                <li>Arkanıza bir sandalye koyun, ayaklar omuz genişliğinde açık durun.</li>
+                <li>Sandalyeye dokunacak kadar kalçayı geriye verip çömelin ve tekrar doğrulun.</li>
+            </ol>
+        </div>
+        <!-- PNG Görsel Alanı -->
+        <div class="exercise-img-box">
+            <img src="{{ url_for('static', filename='squat.png') }}" alt="Squat">
+        </div>
+    </div>
+
+    <div class="tip-box">
+        💡 <strong>Pratik İpucu:</strong> Esneme hareketlerine geçmeden önce 3-5 dakika olduğun yerde hafif adımlayarak kaslarını ısındırmayı unutma!
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sporcu Hayat{% endblock %}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: rgb(203, 203, 203);
+            animation: fadeIn 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .ustbaslik {
+            background: linear-gradient(135deg, #5b44ef 0%, rgba(220, 38, 38, 0.67) 100%);
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            border-radius: 0 0 10px 10px;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .ustbaslik h1 {
+            color: #ffffff;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .ustbaslik h1:hover {
+            color: #e2e8f0;
+        }
+
+        /* Hamburger Buton Stili */
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 32px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #38bdf8; /* Tema Cyan rengi */
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Dropdown Menü (Başlangıçta Gizli) */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 60px; /* Navbar yüksekliğinize göre ayarlayabilirsiniz */
+    right: 20px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    min-width: 200px;
+}
+
+/* Menü Açıldığında Görünecek Class */
+.dropdown-menu.active {
+    display: block;
+    animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Alt Alta Sıralama */
+.baslik-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.baslik-btn {
+    color: #e2e8f0;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: block;
+}
+
+.baslik-btn:hover {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    transform: translateX(4px);
+}
+
+/* Açılış Animasyonu */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        .main-content {
+            flex: 1 0 auto;
+            width: 100%;
+            padding-top: 100px;
+        }
+
+
+
+        footer {
+            flex-shrink: 0;
+            width: 100%;
+            background-color: #404040;
+            padding: 30px 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        footer a {
+            font-size: 1rem;
+            color: rgb(240, 228, 207);
+            transition: color 0.3s ease;
+            text-decoration: none;
+            margin-left:50px;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .copyright {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+        @media(max-width: 768px) {
+            .ustbaslik {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <div class="ustbaslik" id="navbar">
+        <a href="/" class="logo-link">
+            <h1>Sporcu Hayat</h1>
+        </a>
+<button class="hamburger-btn" onclick="toggleMenu()" aria-label="Menüyü Aç/Kapat">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div class="dropdown-menu" id="dropdownMenu">
+    <div class="baslik-container">
+        <a href="/login" class="baslik-btn">Giriş Yap</a>
+        <a href="/register" class="baslik-btn">Kayıt Ol</a>
+        <a href="/about" class="baslik-btn">Hakkımızda</a>
+        <a href="/spor" class="baslik-btn">Spor'a Başla</a>
+        <a href="/tesettur" class="baslik-btn">Tesettürle Spor</a>
+        <a href="/esneme" class="baslik-btn">Temel Egzersizler</a>
+    </div>
+</div></div>
+
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/register">Hesap Oluştur</a>
+            <a href="/login">Giriş Yap</a>
+            <a href="/about">Hakkımızda</a>
+            <a href="/spor">Spor'a Başla</a>
+            <a href="/tesettur">Tesettürle Spor</a>
+            <a href="/esneme">Temel Egzersizler</a>
+
+        </div>
+        <div class="copyright">
+            © 2026 Sporcu Hayat - Tüm Hakları Saklıdır.
+        </div>
+    </footer>
+
+    <script>
+    function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.toggle('active');
+}
+
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('dropdownMenu');
+    const button = document.querySelector('.hamburger-btn');
+    
+    if (!menu.contains(event.target) && !button.contains(event.target)) {
+        menu.classList.remove('active');
+    }
+});</script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% block title %}Ana Sayfa - Sporcu Hayat{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 40%, #780000 100%);
+        color: #ffffff;
+    }
+
+    .container {
+        background: rgba(15, 23, 42, 0.85);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        margin: 40px auto;
+        border-radius: 24px;
+        padding: 40px 30px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                    0 0 30px rgba(220, 38, 38, 0.2);
+    }
+
+    .logo {
+        font-size: 2.2rem;
+        font-weight: 900;
+        font-style: italic;
+        letter-spacing: 2px;
+        background: linear-gradient(90deg, #e4e9eb, #405081);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 30px;
+    }
+
+    .btn-aksiyon {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: 700;
+        padding: 20px 40px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .btn-aksiyon:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(239, 68, 68, 0.6);
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    }
+
+    .card-gorev {
+        margin-top: 35px;
+        background: rgba(30, 41, 59, 0.9);
+        border-left: 6px solid #38bdf8;
+        border-radius: 16px;
+        padding: 25px;
+        text-align: left;
+        animation: fadeIn 0.5s ease-in-out;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .card-gorev h3 {
+        color: #38bdf8;
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .card-gorev p {
+        color: #e2e8f0;
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    .btn-tamam {
+        margin-top: 15px;
+        background: #10b981;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        transition: 0.2s;
+    }
+
+    .btn-tamam:hover {
+        background: #059669;
+    }
+
+    .community-section {
+        margin: 50px auto;
+        max-width: 900px;
+        padding: 20px;
+    }
+
+    .stat-card {
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-card h3 {
+        color: #38bdf8;
+        font-size: 2rem;
+        margin: 0;
+    }
+
+    .members-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .member-card {
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: 0.3s;
+    }
+
+    .member-card:hover {
+        transform: translateY(-5px);
+        border-color: #38bdf8;
+    }
+
+    .member-info h4 {
+        margin: 0;
+        color: #f8fafc;
+        font-size: 1.1rem;
+    }
+
+    .member-badge {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="logo">Hayat Sporla Güzel</div>
+
+    <!-- Ana Görev Butonu -->
+    <form method="POST">
+        <button type="submit" class="btn-aksiyon">Harekete Başla🔥</button>
+    </form>
+
+    <!-- Python'dan Görev Gelirse Görünecek Alan -->
+   <!-- Eski buton yerine bunu koy: -->
+{% if gorev %}
+<div class="card-gorev">
+    <h3>⚡ {{ gorev.hedef }}</h3>
+    <p>{{ gorev.mesaj }}</p>
+    
+    <form action="{{ url_for('gorev_tamamla') }}" method="POST">
+        <input type="hidden" name="gorev_id" value="{{ gorev.id }}">
+        <button type="submit" class="btn-tamam">TAMAMLADIM 💪</button>
+    </form>
+</div>
+{% endif %}
+</div>
+
+<section class="community-section">
+    <!-- Toplam Takipçi / Üye Sayacı -->
+    <div class="stat-card">
+        <h2>🔥 Sporcu Topluluğumuz</h2>
+        <h3>{{ uye_sayisi }} Takipçi / Aktif Sporcu</h3>
+    </div>
+
+    <!-- Üye Başarıları / Liderlik Tablosu -->
+    <h3 style="color: #cbd5e1; margin-bottom: 15px;">🏆 Sporcular</h3>
+    <div class="members-grid">
+        {% for kullanici_adi, veri in kullanicilar.items() %}
+            <div class="member-card">
+                <div class="member-info">
+                    <h4>@{{ kullanici_adi }}</h4>
+                    <span style="color: #94a3b8; font-size: 0.85rem;">Tamamlanan Antrenman</span>
+                </div>
+                <div class="member-badge">
+                    💪 {{ veri.tamamlanan_gorevler | default(0) }} Puan
+                </div>
+            </div>
+        {% else %}
+            <p style="color: #94a3b8; text-align: center; grid-column: 1 / -1;">Henüz kayıtlı sporcu bulunmuyor. İlk katılan sen ol!</p>
+        {% endfor %}
+    </div>
+    
+</section>
+<script>
+function gorevTamamla(kullaniciAdi) {
+    fetch('/gorev-tamamla', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kullanici: kullaniciAdi })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            alert('Efsanesin! Puanın hanene yazıldı. 🔥');
+            location.reload(); // Sayıyı güncellemek için sayfayı yeniler
+        }
+    });
+}
+</script>
+{% endblock %}
